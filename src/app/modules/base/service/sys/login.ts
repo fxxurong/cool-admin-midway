@@ -52,19 +52,21 @@ export class BaseSysLoginService extends BaseService {
    * @param login
    */
   async login(login: LoginDTO) {
-    const { username, captchaId, verifyCode, password } = login;
+    console.log(login);
+    const { username, password } = login;
     // 校验验证码
-    const checkV = await this.captchaCheck(captchaId, verifyCode);
-    if (checkV) {
+    // const checkV = await this.captchaCheck(captchaId, verifyCode);
+    // if (checkV) {
       const user = await this.baseSysUserEntity.findOne({ username });
+      console.log(user);
       // 校验用户
       if (user) {
         // 校验用户状态及密码
         if (user.status === 0 || user.password !== md5(password)) {
-          throw new CoolCommException('账户或密码不正确~');
+          throw new CoolCommException('账户或密码不正确~1');
         }
       } else {
-        throw new CoolCommException('账户或密码不正确~');
+        throw new CoolCommException('账户或密码不正确~2');
       }
       // 校验角色
       const roleIds = await this.baseSysRoleService.getByUser(user.id);
@@ -101,9 +103,9 @@ export class BaseSysLoginService extends BaseService {
       await this.coolCache.set(`admin:token:refresh:${user.id}`, result.token);
 
       return result;
-    } else {
-      throw new CoolCommException('验证码不正确');
-    }
+    // } else {
+    //   throw new CoolCommException('验证码不正确');
+    // }
   }
 
   /**

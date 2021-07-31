@@ -11,11 +11,11 @@ export class LoginDTO {
   @Rule(RuleType.string().required())
   password: string;
 
-  // 验证码ID
-  @Rule(RuleType.string().required())
-  captchaId: string;
+  // // 验证码ID
+  // @Rule(RuleType.string().required())
+  // captchaId: string;
 
-  // 验证码
-  @Rule(RuleType.string().required())
-  verifyCode: number;
+  // // 验证码
+  // @Rule(RuleType.string().required())
+  // verifyCode: number;
 }
