@@ -52,21 +52,20 @@ export class BaseSysLoginService extends BaseService {
    * @param login
    */
   async login(login: LoginDTO) {
-    console.log(login);
     const { username, password } = login;
     // 校验验证码
     // const checkV = await this.captchaCheck(captchaId, verifyCode);
     // if (checkV) {
       const user = await this.baseSysUserEntity.findOne({ username });
-      console.log(user);
+      console.trace(user);
       // 校验用户
       if (user) {
         // 校验用户状态及密码
         if (user.status === 0 || user.password !== md5(password)) {
-          throw new CoolCommException('账户或密码不正确~1');
+          throw new CoolCommException('密码错误！');
         }
       } else {
-        throw new CoolCommException('账户或密码不正确~2');
+        throw new CoolCommException('没有这个用户！');
       }
       // 校验角色
       const roleIds = await this.baseSysRoleService.getByUser(user.id);
