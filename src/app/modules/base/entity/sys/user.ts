@@ -52,4 +52,7 @@ export class BaseSysUserEntity extends BaseEntity {
 
   @Column({ comment: 'socketId', nullable: true })
   socketId: string;
+
+  @Column({ comment: 'role',nullable: true })
+  role: string;
 }

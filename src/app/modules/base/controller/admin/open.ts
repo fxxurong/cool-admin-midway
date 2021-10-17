@@ -29,20 +29,21 @@ export class BaseOpenController extends BaseController {
   ctx: Context;
 
   /**
-   * 根据配置参数key获得网页内容(富文本)
-   */
-  @Get('/html')
-  async htmlByKey(@Query() key: string) {
-    this.ctx.body = await this.baseSysParamService.htmlByKey(key);
-  }
-
-  /**
    * 登录
    * @param login
    */
   @Post('/login')
   async login(@Body(ALL) login: LoginDTO) {
     return this.ok(await this.baseSysLoginService.login(login));
+  }
+
+  /**
+   * 退出
+   */
+  @Post('/logout')
+  async logout() {
+    await this.baseSysLoginService.logout();
+    return this.ok();
   }
 
   /**

@@ -69,13 +69,4 @@ export class BaseCommController extends BaseController {
   async uploadMode() {
     return this.ok(this.coolFile.getMode());
   }
-
-  /**
-   * 退出
-   */
-  @Post('/logout')
-  async logout() {
-    await this.baseSysLoginService.logout();
-    return this.ok();
-  }
 }
